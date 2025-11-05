@@ -28,7 +28,10 @@ impl From<MemoryError> for AllocationError {
             MemoryError::SizeIsZero => AllocationError::SizeIsZero,
             MemoryError::OutOfMemory => AllocationError::OutOfMemory,
             MemoryError::AlignmentFailure => AllocationError::AlignmentFailure,
-            MemoryError::UnknownError(_) => AllocationError::InternalError,
+            MemoryError::UnknownError(code) => {
+                println!("Unknown error code: {:?}", code);
+                AllocationError::InternalError
+            }
         }
     }
 }
