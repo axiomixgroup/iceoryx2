@@ -32,6 +32,7 @@ pub mod publisher {
     use iceoryx2_bb_testing::assert_that;
     use iceoryx2_bb_testing::lifetime_tracker::LifetimeTracker;
     use iceoryx2_bb_testing::watchdog::Watchdog;
+    use iceoryx2_cal::shm_allocator::ShmAllocationError;
 
     const TIMEOUT: Duration = Duration::from_millis(25);
 
@@ -532,7 +533,7 @@ pub mod publisher {
         assert_that!(
             format!("{}", LoanError::ExceedsMaxLoanSize), eq "LoanError::ExceedsMaxLoanSize");
         assert_that!(
-            format!("{}", LoanError::InternalFailure), eq "LoanError::InternalFailure");
+            format!("{}", LoanError::InternalFailure(ShmAllocationError::ExceedsMaxSupportedAlignment)), eq "LoanError::InternalFailure(ShmAllocationError::ExceedsMaxSupportedAlignment)");
     }
 
     #[conformance_test]

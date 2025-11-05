@@ -64,7 +64,7 @@ impl IntoCInt for SendError {
             SendError::LoanError(LoanError::ExceedsMaxLoanSize) => {
                 iox2_send_error_e::LOAN_ERROR_EXCEEDS_MAX_LOAN_SIZE
             }
-            SendError::LoanError(LoanError::InternalFailure) => {
+            SendError::LoanError(LoanError::InternalFailure(_)) => {
                 iox2_send_error_e::LOAN_ERROR_INTERNAL_FAILURE
             }
             SendError::ConnectionError(_) => iox2_send_error_e::CONNECTION_ERROR,
@@ -78,7 +78,7 @@ impl IntoCInt for LoanError {
             LoanError::OutOfMemory => iox2_loan_error_e::OUT_OF_MEMORY,
             LoanError::ExceedsMaxLoans => iox2_loan_error_e::EXCEEDS_MAX_LOANED_SAMPLES,
             LoanError::ExceedsMaxLoanSize => iox2_loan_error_e::EXCEEDS_MAX_LOAN_SIZE,
-            LoanError::InternalFailure => iox2_loan_error_e::INTERNAL_FAILURE,
+            LoanError::InternalFailure(_) => iox2_loan_error_e::INTERNAL_FAILURE,
         }) as c_int
     }
 }

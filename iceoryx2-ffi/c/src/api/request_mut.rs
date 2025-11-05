@@ -65,7 +65,7 @@ impl IntoCInt for RequestSendError {
             RequestSendError::SendError(SendError::LoanError(LoanError::ExceedsMaxLoanSize)) => {
                 iox2_request_send_error_e::LOAN_ERROR_EXCEEDS_MAX_LOAN_SIZE
             }
-            RequestSendError::SendError(SendError::LoanError(LoanError::InternalFailure)) => {
+            RequestSendError::SendError(SendError::LoanError(LoanError::InternalFailure(_))) => {
                 iox2_request_send_error_e::LOAN_ERROR_INTERNAL_FAILURE
             }
             RequestSendError::SendError(SendError::ConnectionError(_)) => {

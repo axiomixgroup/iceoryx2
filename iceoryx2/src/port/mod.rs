@@ -12,6 +12,7 @@
 
 use core::fmt::Debug;
 
+use iceoryx2_cal::shm_allocator::ShmAllocationError;
 use tiny_fn::tiny_fn;
 use update_connections::ConnectionFailure;
 
@@ -93,7 +94,7 @@ pub enum LoanError {
     /// [`AllocationStrategy`](iceoryx2_cal::shm_allocator::AllocationStrategy).
     ExceedsMaxLoanSize,
     /// Errors that indicate either an implementation issue or a wrongly configured system.
-    InternalFailure,
+    InternalFailure(ShmAllocationError),
 }
 
 impl core::fmt::Display for LoanError {

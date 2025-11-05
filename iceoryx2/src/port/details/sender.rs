@@ -324,7 +324,7 @@ impl<Service: service::Service> Sender<Service> {
                 fatal_panic!(from self, "{} {:?} since the system seems to be corrupted.", msg, layout);
             }
             Err(v) => {
-                fail!(from self, with LoanError::InternalFailure,
+                fail!(from self, with LoanError::InternalFailure(v),
                     "{} {:?} since an internal failure occurred ({:?}).", msg, layout, v);
             }
         };
