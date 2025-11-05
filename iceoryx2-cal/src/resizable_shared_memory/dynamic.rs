@@ -616,6 +616,7 @@ where
         let segment_id = if new_number_of_reallocations < MAX_NUMBER_OF_REALLOCATIONS {
             SlotMapKey::new(new_number_of_reallocations)
         } else {
+            println!("MaxReallocationsReached: {:?}", Self::max_number_of_reallocations());
             fail!(from self, with ResizableShmAllocationError::MaxReallocationsReached,
                 "{msg} {:?} since it would exceed the maximum amount of reallocations of {}. With a better configuration hint, this issue can be avoided.",
                 layout, Self::max_number_of_reallocations());

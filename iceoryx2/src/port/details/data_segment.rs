@@ -140,6 +140,7 @@ impl<Service: service::Service> DataSegment<Service> {
                         "{msg} since the maxmimum number of reallocations was reached. Try to provide initial_max_slice_len({}) as hint when creating the publisher to have a more fitting initial setup.", layout.size());
                 }
                 Err(ResizableShmAllocationError::SharedMemoryCreateError(e)) => {
+                    println!("e: {:?}", e);
                     fail!(from self,
                         with ShmAllocationError::AllocationError(AllocationError::InternalError),
                         "{msg} since the shared memory segment creation failed while resizing the memory due to ({:?}).", e);
