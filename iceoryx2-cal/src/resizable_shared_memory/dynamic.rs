@@ -616,7 +616,10 @@ where
         let segment_id = if new_number_of_reallocations < MAX_NUMBER_OF_REALLOCATIONS {
             SlotMapKey::new(new_number_of_reallocations)
         } else {
-            println!("MaxReallocationsReached: {:?}", Self::max_number_of_reallocations());
+            println!(
+                "MaxReallocationsReached: {:?}",
+                Self::max_number_of_reallocations()
+            );
             fail!(from self, with ResizableShmAllocationError::MaxReallocationsReached,
                 "{msg} {:?} since it would exceed the maximum amount of reallocations of {}. With a better configuration hint, this issue can be avoided.",
                 layout, Self::max_number_of_reallocations());
@@ -663,6 +666,7 @@ where
             || e == ShmAllocationError::AllocationError(AllocationError::SizeTooLarge)
         {
             if state.shared_state.allocation_strategy == AllocationStrategy::Static {
+                println!("Static allocation strategy: {:?}", e);
                 fail!(from self, with e.into(),
                                     "{msg} since there is not enough memory left ({:?}) and the allocation strategy {:?} forbids reallocation.",
                                     e, state.shared_state.allocation_strategy);
