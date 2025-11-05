@@ -256,10 +256,12 @@ pub mod details {
                         "{} due to insufficient permissions.", msg);
                 }
                 Err(DynamicStorageCreateError::InitializationFailed) => {
+                    println!("InitializationFailed");
                     fail!(from self, with SharedMemoryCreateError::InternalError,
                         "{} since the initialization failed.", msg);
                 }
                 Err(DynamicStorageCreateError::InternalError) => {
+                    println!("InternalError");
                     fail!(from self, with SharedMemoryCreateError::InternalError,
                         "{} since an unknown error has occurred.", msg);
                 }

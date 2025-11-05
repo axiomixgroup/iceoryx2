@@ -290,7 +290,8 @@ impl<T: Send + Sync + Debug> Builder<'_, T> {
                 fail!(from self, with DynamicStorageCreateError::InsufficientPermissions,
                     "{} due to insufficient permissions.", msg);
             }
-            Err(_) => {
+            Err(e) => {
+                println!("SharedMemoryCreationError: {:?}", e);
                 fail!(from self, with DynamicStorageCreateError::InternalError,
                     "{} since the underlying shared memory could not be created.", msg);
             }
@@ -347,6 +348,7 @@ impl<T: Send + Sync + Debug> Builder<'_, T> {
         if let Err(e) = shm.set_permission(FINAL_PERMISSIONS) {
             unsafe { core::ptr::drop_in_place(value) };
             shm.acquire_ownership();
+            println!("Failed to set final permissions: {:?}", e);
             fail!(from origin, with DynamicStorageCreateError::InternalError,
                 "{} since the final permissions could not be applied to the underlying shared memory ({:?}).",
                 msg, e);

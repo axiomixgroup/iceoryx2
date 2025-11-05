@@ -675,6 +675,7 @@ where
                 Ok(())
             }
         } else {
+            println!("Other allocation error: {:?}", e);
             fail!(from self, with e.into(), "{msg} due to {:?}.", e);
         }
     }
